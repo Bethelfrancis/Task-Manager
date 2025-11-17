@@ -10,9 +10,11 @@ export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState("");
 
     const handleLogin = async () => {
+        setLoading(true)
         setError("");
 
         const { error } = await supabase.auth.signInWithPassword({
@@ -22,10 +24,12 @@ export default function LoginPage() {
 
         if (error) {
             setError(error.message);
+            setLoading(false)
             return;
         }
 
         router.push("/tasks");
+        setLoading(false)
     };
 
     return (
@@ -53,7 +57,7 @@ export default function LoginPage() {
 
                 <button
                     onClick={handleLogin}
-                    className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700"
+                    className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 cursor-pointer"
                 >
                     Login
                 </button>
