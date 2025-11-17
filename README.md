@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+📝 Task Manager App – GadaHQ Frontend Developer Assessment
 
-## Getting Started
+A simple task manager application built with Next.js (App Router), TypeScript, and Supabase for Authentication and Database storage.
+Users can register, log in, create tasks, view tasks, and delete tasks — with each user only seeing their own tasks.
 
-First, run the development server:
+This project was built as part of the GadaHQ Frontend Developer Assessment.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🚀 Tech Stack
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next.js 16 (App Router)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+TypeScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Supabase Authentication (Email/Password)
 
-## Learn More
+Supabase Database
 
-To learn more about Next.js, take a look at the following resources:
+Tailwind CSS
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+🔐 Features
+✅ Authentication
 
-## Deploy on Vercel
+Email + Password login & signup using Supabase Auth
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Protected routes (only authenticated users can access task page)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Automatic redirect for unauthenticated users
+
+✅ Task Management
+
+Every logged-in user can:
+
+Create a task
+
+View all their tasks
+
+Delete a task
+
+Each task includes:
+
+title
+
+description
+
+user_id
+
+Tasks are scoped to the current authenticated user.
+
+
+🗄️ Database
+
+Table: tasks
+
+Column	Type
+id	uuid (pk)
+title	text
+description	text
+user_id	uuid
+created_at	timestamp
+
+Clone the repository:
+
+git clone https://github.com/Bethelfrancis/Task-Manager.git
+cd task
+
+🔗 Live Demo
+
+Vercel App Link: add link here
+GitHub Repo: add your repo link here
+
+👤 Author
+
+Bethel Francis
+Frontend Developer
+
+GitHub: https://github.com/Bethelfrancis
+Email: bethelndegonekwu@gmail.com
