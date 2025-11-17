@@ -28,7 +28,7 @@ export default function SignUpPage() {
         }
 
         alert("Account created! Please check your email to confirm.");
-        router.push("/login");
+        router.push("/tasks");
         setLoading(false);
     };
 

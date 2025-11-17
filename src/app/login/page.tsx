@@ -59,7 +59,7 @@ export default function LoginPage() {
                     onClick={handleLogin}
                     className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 cursor-pointer"
                 >
-                    Login
+                    {loading ? 'Loggining In...' : 'Login'}
                 </button>
 
                 <p className="text-center text-sm mt-4">
