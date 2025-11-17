@@ -38,11 +38,7 @@ export default function SignUpPage() {
             setLoading(false);
             return;
         }
-
-        alert(
-            "Account created! Please check your email to confirm (if email confirmation is enabled)."
-        );
-
+22
         const { data: { session } } = await supabase.auth.getSession();
         if (session) router.replace("/tasks");
 
