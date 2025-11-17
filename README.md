@@ -66,8 +66,8 @@ cd task
 
 🔗 Live Demo
 
-Vercel App Link: add link here
-GitHub Repo: add your repo link here
+Vercel App Link: task-manager-xi-sable-47.vercel.app
+GitHub Repo: https://github.com/Bethelfrancis/Task-Manager.git
 
 👤 Author
 
