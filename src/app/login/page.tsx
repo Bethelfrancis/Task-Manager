@@ -1,20 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
-import Link from "next/link"
-
+import Link from "next/link";
 
 export default function LoginPage() {
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) router.replace("/tasks");
+        });
+
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) router.replace("/tasks");
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, [router]);
+
     const handleLogin = async () => {
-        setLoading(true)
+        setLoading(true);
         setError("");
 
         const { error } = await supabase.auth.signInWithPassword({
@@ -24,12 +35,9 @@ export default function LoginPage() {
 
         if (error) {
             setError(error.message);
-            setLoading(false)
-            return;
         }
 
-        router.push("/tasks");
-        setLoading(false)
+        setLoading(false);
     };
 
     return (
@@ -57,9 +65,10 @@ export default function LoginPage() {
 
                 <button
                     onClick={handleLogin}
+                    disabled={loading}
                     className="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700 cursor-pointer"
                 >
-                    {loading ? 'Loggining In...' : 'Login'}
+                    {loading ? "Logging In..." : "Login"}
                 </button>
 
                 <p className="text-center text-sm mt-4">

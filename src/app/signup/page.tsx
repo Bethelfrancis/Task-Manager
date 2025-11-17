@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -11,6 +11,18 @@ export default function SignUpPage() {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+
+    useEffect(() => {
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            if (session) router.replace("/tasks");
+        });
+
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            if (session) router.replace("/tasks");
+        });
+
+        return () => listener.subscription.unsubscribe();
+    }, [router]);
 
     const handleSignup = async () => {
         setLoading(true);
@@ -27,8 +39,13 @@ export default function SignUpPage() {
             return;
         }
 
-        alert("Account created! Please check your email to confirm.");
-        router.push("/tasks");
+        alert(
+            "Account created! Please check your email to confirm (if email confirmation is enabled)."
+        );
+
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) router.replace("/tasks");
+
         setLoading(false);
     };
 
